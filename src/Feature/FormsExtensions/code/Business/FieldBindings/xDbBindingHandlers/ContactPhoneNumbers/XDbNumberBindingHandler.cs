@@ -6,17 +6,15 @@ namespace Feature.FormsExtensions.Business.FieldBindings.xDbBindingHandlers.Cont
     {
         protected override IBindingHandlerResult GetFieldBindingValueFromFacet(PhoneNumber phoneNumber)
         {
-            if (string.IsNullOrEmpty(phoneNumber.Number))
-                return new NoBindingValueFoundResult();
-            return new BindingValueFoundResult(phoneNumber.Number);
+            return string.IsNullOrEmpty(phoneNumber.Number)
+                ? (IBindingHandlerResult) new NoBindingValueFoundResult()
+                : new BindingValueFoundResult(phoneNumber.Number);
         }
 
         public override void StoreBindingValue(object newValue)
         {
-            if (newValue is string value)
-            {
-                UpdateFacet(x => x.PreferredPhoneNumber.Number = value);
-            }
+            if (!(newValue is string value)) return;
+            UpdateFacet(x => x.PreferredPhoneNumber.Number = value);
         }
         
     }

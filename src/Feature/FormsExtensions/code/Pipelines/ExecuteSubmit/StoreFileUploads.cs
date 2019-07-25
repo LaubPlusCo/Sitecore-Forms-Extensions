@@ -24,8 +24,7 @@ namespace Feature.FormsExtensions.Pipelines.ExecuteSubmit
 
             foreach (var field in args.FormSubmitContext.Fields)
             {
-                var uploadField = field as FileUploadModel;
-                if (uploadField == null)
+                if (!(field is FileUploadModel uploadField))
                     continue;
                 HandleUploadField(uploadField,args.FormSubmitContext.FormId);
             }

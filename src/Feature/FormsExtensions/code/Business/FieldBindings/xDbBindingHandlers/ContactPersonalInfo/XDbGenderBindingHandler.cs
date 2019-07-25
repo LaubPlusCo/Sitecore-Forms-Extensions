@@ -6,17 +6,15 @@ namespace Feature.FormsExtensions.Business.FieldBindings.xDbBindingHandlers.Cont
     {
         protected override IBindingHandlerResult GetFieldBindingValueFromFacet(PersonalInformation facet)
         {
-            if (string.IsNullOrEmpty(facet.Gender))
-                return new NoBindingValueFoundResult();
-            return new BindingValueFoundResult(facet.Gender);
+            return string.IsNullOrEmpty(facet.Gender)
+                ? (IBindingHandlerResult) new NoBindingValueFoundResult()
+                : new BindingValueFoundResult(facet.Gender);
         }
 
         public override void StoreBindingValue(object newValue)
         {
-            if (newValue is string gender)
-            {
-                UpdateFacet(x=>x.Gender=gender);
-            }
+            if (!(newValue is string gender)) return;
+            UpdateFacet(x=>x.Gender=gender);
         }
         
     }

@@ -11,10 +11,8 @@ namespace Feature.FormsExtensions.Business.FieldBindings.xDbBindingHandlers.Cont
 
         public override void StoreBindingValue(object newValue)
         {
-            if (newValue is bool value)
-            {
-                UpdateFacet(x=>x.ConsentRevoked=value);
-            }
+            if (!(newValue is bool value)) return;
+            UpdateFacet(x=>x.ConsentRevoked=value);
         }
     }
 }

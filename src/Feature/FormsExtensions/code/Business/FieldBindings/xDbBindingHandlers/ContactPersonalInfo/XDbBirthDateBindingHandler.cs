@@ -6,17 +6,15 @@ namespace Feature.FormsExtensions.Business.FieldBindings.xDbBindingHandlers.Cont
     {
         protected override IBindingHandlerResult GetFieldBindingValueFromFacet(PersonalInformation facet)
         {
-            if (!facet.Birthdate.HasValue)
-                return new NoBindingValueFoundResult();
-            return new BindingValueFoundResult(facet.Birthdate);
+            return !facet.Birthdate.HasValue
+                ? (IBindingHandlerResult) new NoBindingValueFoundResult()
+                : new BindingValueFoundResult(facet.Birthdate);
         }
         
         public override void StoreBindingValue(object newValue)
         {
-            if (newValue is System.DateTime birthDate)
-            {
-                UpdateFacet(x=>x.Birthdate=birthDate);
-            }
+            if (!(newValue is System.DateTime birthDate)) return;
+            UpdateFacet(x=>x.Birthdate=birthDate);
         }
         
     }

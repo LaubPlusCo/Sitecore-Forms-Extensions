@@ -6,9 +6,9 @@ namespace Feature.FormsExtensions.Business.FieldBindings.xDbBindingHandlers.Cont
     {
         protected override IBindingHandlerResult GetFieldBindingValueFromFacet(Address addres)
         {
-            if (string.IsNullOrEmpty(addres.StateOrProvince))
-                return new NoBindingValueFoundResult();
-            return new BindingValueFoundResult(addres.StateOrProvince);
+            return string.IsNullOrEmpty(addres.StateOrProvince)
+                ? (IBindingHandlerResult) new NoBindingValueFoundResult()
+                : new BindingValueFoundResult(addres.StateOrProvince);
         }
 
         public override void StoreBindingValue(object newValue)

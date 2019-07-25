@@ -13,10 +13,8 @@ namespace Feature.FormsExtensions.Business.FieldBindings.xDbBindingHandlers.Cont
 
         public override void StoreBindingValue(object newValue)
         {
-            if (newValue is string value)
-            {
-                UpdateFacet(x => x.PreferredPhoneNumber.CountryCode = value);
-            }
+            if (!(newValue is string value)) return;
+            UpdateFacet(x => x.PreferredPhoneNumber.CountryCode = value);
         }
 
     }

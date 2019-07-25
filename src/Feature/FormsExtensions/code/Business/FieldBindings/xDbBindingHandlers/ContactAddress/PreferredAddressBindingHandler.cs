@@ -15,11 +15,7 @@ namespace Feature.FormsExtensions.Business.FieldBindings.xDbBindingHandlers.Cont
         }
         protected override IBindingHandlerResult GetFieldBindingValueFromFacet(AddressList facet)
         {
-            if (facet.PreferredAddress == null)
-            {
-                return new NoBindingValueFoundResult();
-            }
-            return GetFieldBindingValueFromFacet(facet.PreferredAddress);
+            return facet.PreferredAddress == null ? new NoBindingValueFoundResult() : GetFieldBindingValueFromFacet(facet.PreferredAddress);
         }
 
         protected abstract IBindingHandlerResult GetFieldBindingValueFromFacet(Address preferredAddress);

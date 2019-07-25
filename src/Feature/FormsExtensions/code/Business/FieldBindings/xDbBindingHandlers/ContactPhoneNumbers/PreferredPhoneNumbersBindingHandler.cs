@@ -15,11 +15,7 @@ namespace Feature.FormsExtensions.Business.FieldBindings.xDbBindingHandlers.Cont
         }
         protected override IBindingHandlerResult GetFieldBindingValueFromFacet(PhoneNumberList facet)
         {
-            if (facet.PreferredPhoneNumber == null)
-            {
-                return new NoBindingValueFoundResult();
-            }
-            return GetFieldBindingValueFromFacet(facet.PreferredPhoneNumber);
+            return facet.PreferredPhoneNumber == null ? new NoBindingValueFoundResult() : GetFieldBindingValueFromFacet(facet.PreferredPhoneNumber);
         }
 
         protected abstract IBindingHandlerResult GetFieldBindingValueFromFacet(PhoneNumber phoneNumber);
